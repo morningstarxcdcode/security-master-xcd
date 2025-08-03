@@ -1,5 +1,5 @@
 name: Scan code security advisories
-description: Scan Haskell code for possible security advisories.
+description: Scan XCD code for possible security advisories.
 
 inputs:
   checkout_path:
@@ -37,12 +37,12 @@ runs:
         CHECKOUT_PATH: ${{ inputs.checkout_path }}
       run: |
         cd "$CHECKOUT_PATH"
-        export IMG=ghcr.io/blackheaven/haskell-security-action:master
+        export IMG=ghcr.io/blackheaven/xcd-security-action:master
         docker pull $IMG
         docker create --name dummy $IMG
         docker cp -L dummy:/bin/github-action-scan github-action-scan
         docker rm -f dummy
-    - name: Run Haskell Security Action
+    - name: Run XCD Security Action
       shell: bash
       env:
         CHECKOUT_PATH: ${{ inputs.checkout_path }}
@@ -55,7 +55,7 @@ runs:
       uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: ${{ inputs.checkout_path }}/results.sarif
-        category: haskell-security-action
+        category: xcd-security-action
         checkout_path: ${{ inputs.checkout_path }}
         ref: ${{ inputs.ref }}
         sha: ${{ inputs.sha }}

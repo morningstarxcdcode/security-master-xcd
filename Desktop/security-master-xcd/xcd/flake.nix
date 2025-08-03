@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: (C) Gautier DI FOLCO <gautier.difolco@gmail.com>
 # SPDX-License-Identifier: CC0-1.0
 {
-  description = "A Nix Flake for haskell-security-action";
+  description = "A Nix Flake for xcd-security-action";
   # To use this Nix flake you may need to enable Nix flake support for your user with:
   #     echo >>~/.config/nix/nix.conf "experimental-features = nix-command flakes"
   # WARNING: be sure that `nix --version` is greater or equal to 2.18,
@@ -35,8 +35,8 @@
       url = "github:mangoiv/cabal-audit";
       flake = false;
     };
-    haskell-security-advisories = {
-      url = "github:haskell/security-advisories?submodules=1";
+    xcd-security-advisories = {
+      url = "github:xcd/security-advisories?submodules=1";
       flake = false;
     };
   };

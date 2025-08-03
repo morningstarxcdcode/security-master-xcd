@@ -52,7 +52,7 @@ class VulnerabilityScanner:
         # This is a common pattern where a specific library version has a known flaw.
         # We're using a simple string check for demonstration, but real scanners
         # would use complex pattern matching, dependency graphs, or vulnerability databases.
-        if "aeson" in target_codebase_path.lower() or "haskell" in target_codebase_path.lower():
+        if "aeson" in target_codebase_path.lower() or "xcd" in target_codebase_path.lower():
             # We're simulating a specific vulnerability, HSEC-2023-0001,
             # which is a hash flooding issue in the 'aeson' library.
             # The details here are crafted to match the reporting requirements.

@@ -1,4 +1,4 @@
-# Contributing to Haskell Security Auditor
+# Contributing to XCD Security Auditor
 
 Every feedback is welcome!
 

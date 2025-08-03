@@ -1,5 +1,5 @@
-name: Haskell Security Auditor
-description: Audits Haskell code for security vulnerabilities and provides actionable insights.
+name: XCD Security Auditor
+description: Audits XCD code for security vulnerabilities and provides actionable insights.
 
 inputs:
   checkout_path:
@@ -33,7 +33,7 @@ runs:
         cd "$CHECKOUT_PATH"
         wget https://github.com/blackheaven/cabal-audit/releases/download/nightly/cabal-audit
         chmod +x cabal-audit
-    - name: Run Haskell Security Auditor
+    - name: Run XCD Security Auditor
       shell: bash
       env:
         CHECKOUT_PATH: ${{ inputs.checkout_path }}
@@ -50,7 +50,7 @@ runs:
       uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: ${{ inputs.checkout_path }}/processed_sarif.json
-        category: haskell-security-auditor
+        category: xcd-security-auditor
         checkout_path: ${{ inputs.checkout_path }}
         ref: ${{ inputs.ref }}
         sha: ${{ inputs.sha }}
