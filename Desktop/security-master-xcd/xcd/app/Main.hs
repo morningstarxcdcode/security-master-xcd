@@ -64,7 +64,7 @@ cliAuditParser =
                           [ long "advisories-repository",
                             metavar "REPOSITORY",
                             help "the url to the repository containing an advisories directory",
-                            value "https://github.com/haskell/security-advisories"
+                            value "https://github.com/xcd/security-advisories"
                           ]
                       )
                 )
@@ -100,7 +100,8 @@ getAdvisories auditConfig = do
 sendAdvisories :: CliOptions -> FilePath -> [(PackageName, ElaboratedPackageInfoAdvised)] -> IO ()
 sendAdvisories cliOptions projectRoot packageAdvisories = do
   ghcVersion <- T.pack <$> readProcess "ghc" ["--version"] ""
-  let advisories =
+  let advisoryBaseUrl = "https://github.com/xcd/security-advisories/advisories/"
+      advisories =
         Map.elems $
           Map.fromListWith (\(advisory, pkgsInfo) (_, pkgsInfo') -> (advisory, pkgsInfo <> pkgsInfo')) $
             flip concatMap packageAdvisories $ \(pkgName, pkgInfo) ->
@@ -129,11 +130,12 @@ sendAdvisories cliOptions projectRoot packageAdvisories = do
                     resultMessage =
                       defaultMultiformatMessageString $
                         let hsecId = T.pack (printHsecId advisory.advisoryId)
+                            advisoryUrl = advisoryBaseUrl <> printHsecId advisory.advisoryId <> ".yml"
                          in T.intercalate "\n" $
                               concat
                                 [ [hsecId <> " \"" <> advisory.advisorySummary <> "\""],
                                   ["published: " <> T.pack (show advisory.advisoryPublished)],
-                                  ["https://haskell.github.io/security-advisories/advisory/" <> hsecId],
+                                  ["Advisory: " <> T.pack advisoryUrl],
                                   ["Concerned package:"],
                                   flip map concernedInfo $ \(pkgName, fixedAt) ->
                                     "* "
