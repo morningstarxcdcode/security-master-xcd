@@ -1,0 +1,33 @@
+
+# Configuration for security-master-xcd
+# This file allows you to customize the behavior of the security scanner.
+
+# Scanner settings
+scanner:
+  # Enable or disable specific scanners
+  enable_scanners:
+    - "vulnerability_scanner" # Scans for known vulnerabilities
+    # - "code_quality_scanner" # Example: Scans for code quality issues (not yet implemented)
+
+# Reporting settings
+reporting:
+  # Output format for reports (e.g., "console", "json", "sarif")
+  output_format: "console"
+  # Path to save reports (if applicable)
+  output_path: "./reports/"
+
+# Auto-fix settings
+autofix:
+  # Enable or disable automatic fix suggestions
+  enable_suggestions: true
+  # Enable or disable automatic pull request creation for fixes
+  enable_auto_pr: false
+
+# GitHub integration settings (if enable_auto_pr is true)
+github:
+  # GitHub repository owner (e.g., "morningstarxcdcode")
+  repo_owner: ""
+  # GitHub repository name (e.g., "security-master-xcd")
+  repo_name: ""
+  # Branch to open pull requests against
+  target_branch: "main"
